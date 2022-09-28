@@ -100,9 +100,29 @@ function generateQuestions()
 function compareAnswer(entry)
 {
     if(entry===possibleQuestions[currentQ].answer)
-    correctAnswer.textContent = "That's correct!";
+    {
+        correctAnswer.textContent = "That's correct!";
+    }
     else
-    correctAnswer.textContent = "That's incorrect!";
+    {
+        correctAnswer.textContent = "That's incorrect!";
+        totalTime -= 10;
+    }
+}
+
+function startTimer()
+{
+    var timerinterval = setInterval(function(){
+        totalTime --;
+      
+        if(totalTime === 0){
+          clearInterval(timerinterval);
+          timerDisplay.textContent = "Time's Up!"
+        }
+        else{
+          timerDisplay.textContent = totalTime ;
+        }
+    }, 1000);
 }
 
 // Event Listeners
@@ -111,6 +131,7 @@ start.addEventListener("click", function(event)
     begin.classList.add('d-none');
     quiz.classList.remove('d-none');
     generateQuestions();
+    startTimer();
 })
 
 possAnswers.addEventListener("click", function (event) 
