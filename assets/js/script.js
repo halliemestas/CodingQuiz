@@ -9,6 +9,8 @@ var lb = document.querySelector("#leaderboardbtn");
 var quiz = document.querySelector("#quizCont");
 var timerDisplay = document.querySelector("#timer");
 var totalTime = 60; 
+var totalScore = 0;
+var scoreDisplay = document.querySelector("#currentScore");
 var qAa = document.querySelector("#sub");
 var question = document.querySelector("#question");
 // index for current question
@@ -46,7 +48,7 @@ var possibleQuestions =
         answer: "Compares both value and data type"
     },
     {
-        question: "What kind of pop up box is avaibale in Javascript?",
+        question: "What kind of pop up box is available in Javascript?",
         choices: ["Prompt", "Confirm", "Alert", "All of the above"],
         answer: "All of the above"
     },
@@ -102,11 +104,17 @@ function compareAnswer(entry)
     if(entry===possibleQuestions[currentQ].answer)
     {
         correctAnswer.textContent = "That's correct!";
+        totalScore++;
+        console.log(totalScore);
+        scoreDisplay.textContent = totalScore;
     }
     else
     {
         correctAnswer.textContent = "That's incorrect!";
+        if(totalTime > 10)
         totalTime -= 10;
+        if(totalTime < 10)
+        totalTime = 0;
     }
 }
 
@@ -115,14 +123,22 @@ function startTimer()
     var timerinterval = setInterval(function(){
         totalTime --;
       
-        if(totalTime === 0){
+        if(totalTime === 0 || totalTime < 0){
           clearInterval(timerinterval);
           timerDisplay.textContent = "Time's Up!"
+          endGame();
         }
         else{
           timerDisplay.textContent = totalTime ;
         }
     }, 1000);
+
+    scoreDisplay.textContent = totalScore;
+}
+
+function endGame()
+{
+
 }
 
 // Event Listeners
