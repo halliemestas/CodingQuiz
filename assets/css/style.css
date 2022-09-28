@@ -1,0 +1,33 @@
+#first, #quizCont, #gameOver, #leaderboard
+{
+    margin: auto;
+    width: 75%;
+    border: 3px solid ;
+    padding: 10px;
+    text-align: center;
+}
+
+.btn
+{
+    border-radius: 8px;
+}
+
+.btn:hover 
+{
+    background-color: black;
+    color: white;
+}
+
+#choiceA, #choiceB, #choiceC, #choiceD
+{
+    border-radius: 8px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+}
+
+li
+{
+    font-size: 25px;
+    font-weight: bold;
+}

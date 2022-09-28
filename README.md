@@ -26,11 +26,11 @@ THEN time is subtracted from the clock
 
 WHEN all questions are answered or the timer reaches 0
 THEN the game is over
-
+<!-- Done -->
 
 WHEN the game is over
 THEN I can save my initials and score
-
+<!-- Done -->
 
 ```
 
@@ -39,9 +39,6 @@ THEN I can save my initials and score
 The following image shows the web application's appearance and functionality:
 
 Coming soon!
-
-<!-- ![Website preview]()
-![Website preview]() -->
 
 #### Live Link
 

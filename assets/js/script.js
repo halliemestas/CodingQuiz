@@ -195,7 +195,9 @@ function generateLeaderboard()
     {
         for (var i = 0; i < scoreStorage.length; i++) {
             var createLi = document.createElement("li");
-            createLi.textContent = scoreStorage[i].initial + scoreStorage[i].score ;
+            createLi.classList.add('list-group-item');
+            createLi.style.textAlign = "center";
+            createLi.textContent = scoreStorage[i].initial + " - " + scoreStorage[i].score ;
             scoreOL.appendChild(createLi);
         }
     }
