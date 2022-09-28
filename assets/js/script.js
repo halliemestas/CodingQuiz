@@ -100,7 +100,6 @@ function compareAnswer(entry)
     {
         correctAnswer.textContent = "That's correct!";
         totalScore++;
-        console.log(totalScore);
         scoreDisplay.textContent = totalScore;
     }
     else
@@ -149,21 +148,37 @@ function saveScore(data)
     }
 
     var newScore = {
-        initials: data,
+        initial: data,
         score: totalScore
     }
     console.log(newScore);
 
     scoreStorage.push(newScore);
-    scoreStorage.sort((a, b) => {
-        return a.score - b.score;});
+
     var newScoreAdded = JSON.stringify(scoreStorage);
     localStorage.setItem("scoreStorage", newScoreAdded);
-    scoreStorage.forEach((e) => {
-        console.log(`${e.score} ${e.initial}`);
-    });
     
+    sortScores();
+}
 
+function sortScores()
+{
+    var scoreStorage = localStorage.getItem("scoreStorage");
+    if(scoreStorage === null)
+    console.log("No scores to reflect")
+    //text content should reflect no current saved scores
+    else
+    {
+        scoreStorage = JSON.parse(scoreStorage);
+        scoreStorage.sort((a, b) => b.score - a.score);
+
+        scoreStorage.forEach((e) => 
+        {
+        console.log(`${e.initial} ${e.score}`);
+        });
+        var sortedScore = JSON.stringify(scoreStorage);
+        localStorage.setItem("scoreStorage", sortedScore);
+    }
 }
 
 // Event Listeners
@@ -186,5 +201,4 @@ possAnswers.addEventListener("click", function (event)
 submitBtn.addEventListener("click", function(event)
 {
     saveScore(input.value);
-    console.log(input.value);
 })
