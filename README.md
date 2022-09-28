@@ -38,8 +38,9 @@ THEN I can save my initials and score
 
 The following image shows the web application's appearance and functionality:
 
-Coming soon!
+![Website preview](assets/images/mockup1.PNG)
+![Website preview](assets/images/mockup2.PNG)
 
 #### Live Link
 
-Coming Soon!
+https://halliemestas.github.io/CodingQuiz/
