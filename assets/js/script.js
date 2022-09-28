@@ -4,7 +4,7 @@ var begin = document.querySelector("#first");
 var start = document.querySelector("#startbtn");
 var lb = document.querySelector("#leaderboardbtn");
 
-// After start selected
+// After Start selected
 var quiz = document.querySelector("#quizCont");
 var timerDisplay = document.querySelector("#timer");
 var totalTime = 60; 
@@ -73,12 +73,17 @@ var possibleQuestions =
     }
 ];
 
-// Final Score
+// Game Over initiated
 var gameOverDisplay = document.querySelector("#gameOver");
 var leaderboardDisplay = document.querySelector("#leaderboard");
 var totalSpan = document.querySelector("#total");
 var input = document.querySelector("#initials");
 var submitBtn = document.querySelector("#submitbtn");
+
+// After Leaderboard selected
+var scoreOL = document.querySelector("#scores");
+var back = document.querySelector("#backbtn");
+var reset = document.querySelector("#resetbtn");
 
 //Functions 
 function generateQuestions() 
@@ -181,6 +186,22 @@ function sortScores()
     }
 }
 
+function generateLeaderboard()
+{
+    var scoreStorage = localStorage.getItem("scoreStorage");
+    scoreStorage = JSON.parse(scoreStorage);
+
+    if (scoreStorage != null) 
+    {
+        for (var i = 0; i < scoreStorage.length; i++) {
+            var createLi = document.createElement("li");
+            createLi.textContent = scoreStorage[i].initial + scoreStorage[i].score ;
+            scoreOL.appendChild(createLi);
+        }
+    }
+
+}
+
 // Event Listeners
 start.addEventListener("click", function(event)
 {
@@ -201,4 +222,24 @@ possAnswers.addEventListener("click", function (event)
 submitBtn.addEventListener("click", function(event)
 {
     saveScore(input.value);
+})
+
+lb.addEventListener("click", function(event)
+{
+    begin.classList.add('d-none');
+    leaderboardDisplay.classList.remove('d-none');
+    generateLeaderboard();
+})
+
+back.addEventListener("click", function(event)
+{
+    begin.classList.remove('d-none');
+    leaderboardDisplay.classList.add('d-none');
+})
+
+reset.addEventListener("click", function(event)
+{
+    localStorage.clear();
+    begin.classList.remove('d-none');
+    leaderboardDisplay.classList.add('d-none');
 })
