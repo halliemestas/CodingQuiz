@@ -1,5 +1,4 @@
 // Global Variables 
-
 // Webpage first loads
 var begin = document.querySelector("#first");
 var start = document.querySelector("#startbtn");
@@ -71,19 +70,15 @@ var possibleQuestions =
         question: "What does || represent?",
         choices: ["And", "Not", "Or", "None of the Above"],
         answer: "Or"
-    },
-    {
-        question: "What function would I use to combine two arrays into a string?",
-        choices: ["push()", "pop()", "splice()", "join()"],
-        answer: "join()"
-    },
-    {
-        question: "If I want to have a variable accessible by all functions, what type should I use?",
-        choices: ["Local", "Global", "Block-scoped", "All of the above"],
-        answer: "Global"
     }
-
 ];
+
+// Final Score
+var gameOverDisplay = document.querySelector("#gameOver");
+var leaderboardDisplay = document.querySelector("#leaderboard");
+var totalSpan = document.querySelector("#total");
+var input = document.querySelector("#initials");
+var submitBtn = document.querySelector("#submitbtn");
 
 //Functions 
 function generateQuestions() 
@@ -138,6 +133,36 @@ function startTimer()
 
 function endGame()
 {
+    quiz.classList.add('d-none');
+    gameOverDisplay.classList.remove('d-none');
+    totalSpan.textContent = totalScore;
+}
+
+function saveScore(data)
+{
+    var scoreStorage = localStorage.getItem("scoreStorage");
+    if(scoreStorage === null)
+    scoreStorage = [] ;
+    else
+    {
+        scoreStorage = JSON.parse(scoreStorage);
+    }
+
+    var newScore = {
+        initials: data,
+        score: totalScore
+    }
+    console.log(newScore);
+
+    scoreStorage.push(newScore);
+    scoreStorage.sort((a, b) => {
+        return a.score - b.score;});
+    var newScoreAdded = JSON.stringify(scoreStorage);
+    localStorage.setItem("scoreStorage", newScoreAdded);
+    scoreStorage.forEach((e) => {
+        console.log(`${e.score} ${e.initial}`);
+    });
+    
 
 }
 
@@ -157,3 +182,9 @@ possAnswers.addEventListener("click", function (event)
   currentQ++;
   generateQuestions();
 });
+
+submitBtn.addEventListener("click", function(event)
+{
+    saveScore(input.value);
+    console.log(input.value);
+})
